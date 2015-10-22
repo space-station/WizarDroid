@@ -201,9 +201,9 @@ public class Wizard implements Closeable, Subscriber {
     }
 
 	private void processStepBeforeChange(WizardStep step, int position) {
-		step.onExit(WizardStep.EXIT_NEXT);
+		if (step!= null) step.onExit(WizardStep.EXIT_NEXT);
 		mWizardFlow.setStepCompleted(position, true);
-		mContextManager.persistStepContext(step);
+		if (step!= null) mContextManager.persistStepContext(step);
 	}
 
     /**
