@@ -152,6 +152,8 @@ public class Wizard implements Closeable, Subscriber {
 						mPreviousStep = getCurrentStep();
 						break;
 					case ViewPager.SCROLL_STATE_SETTLING:
+						WizardStep step= getCurrentStep();
+						if (step != null) { step.onEnter(); }
 						mCallbacks.onStepChanged();
 						break;
 					case ViewPager.SCROLL_STATE_IDLE:
