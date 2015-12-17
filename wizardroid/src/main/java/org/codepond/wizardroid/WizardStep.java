@@ -39,6 +39,9 @@ public abstract class WizardStep extends Fragment {
     public void onExit(int exitCode) {
     }
 
+    public void onEnter() {
+    }
+
 
     /**
      * Notify the wizard that this step state had changed

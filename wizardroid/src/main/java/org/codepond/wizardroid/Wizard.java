@@ -1,12 +1,15 @@
 package org.codepond.wizardroid;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 
 import org.codepond.wizardroid.infrastructure.Bus;
@@ -24,7 +27,7 @@ import java.io.Closeable;
  * class only if you wish to create a custom WizardFragment to control the wizard.
  */
 public class Wizard implements Closeable, Subscriber {
-	/**
+    /**
      * Interface for key wizard events. Implement this interface if you wish to create
      * a custom WizardFragment.
      */
@@ -45,7 +48,7 @@ public class Wizard implements Closeable, Subscriber {
 	private WizardFlow mWizardFlow;
     private ContextManager mContextManager;
     private WizardCallbacks mCallbacks;
-    private ViewPager mPager;
+    private NonSwipeableViewPager mPager;
     private FragmentManager mFragmentManager;
     private int backStackEntryCount;
 	private WizardStep mPreviousStep;
@@ -67,7 +70,7 @@ public class Wizard implements Closeable, Subscriber {
 		this.mWizardFlow = wizardFlow;
         this.mContextManager = contextManager;
         this.mCallbacks = callbacks;
-        this.mPager = (ViewPager) activity.findViewById(R.id.step_container);
+        this.mPager = (NonSwipeableViewPager) activity.findViewById(R.id.step_container);
         if (mPager == null) {
             throw new RuntimeException("Cannot initialize Wizard. View with ID: step_container not found!" +
                     " The hosting Activity/Fragment must have a ViewPager in its layout with ID: step_container");
@@ -118,7 +121,7 @@ public class Wizard implements Closeable, Subscriber {
      * Set the ViewPager in which the Wizard will load the steps into
      * @param viewPager instance of ViewPager
      */
-    public void setViewPager(ViewPager viewPager) {
+    public void setViewPager(NonSwipeableViewPager viewPager) {
         mPager = viewPager;
         mPager.setAdapter(new WizardPagerAdapter(mFragmentManager));
 

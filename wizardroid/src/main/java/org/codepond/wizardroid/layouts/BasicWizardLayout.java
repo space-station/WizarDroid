@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.*;
 import android.widget.Button;
 
+import org.codepond.wizardroid.NonSwipeableViewPager;
 import org.codepond.wizardroid.R;
 import org.codepond.wizardroid.WizardFragment;
 import org.codepond.wizardroid.persistence.ContextManager;
@@ -30,7 +31,7 @@ public abstract class BasicWizardLayout extends WizardFragment implements View.O
     private String mNextButtonText;
     private String mFinishButtonText;
     private String mBackButtonText;
-    private ViewPager mViewPager;
+    private NonSwipeableViewPager mViewPager;
 
     /**
      * Empty constructor for Fragment
@@ -57,7 +58,7 @@ public abstract class BasicWizardLayout extends WizardFragment implements View.O
         mPreviousButton = (Button) wizardLayout.findViewById(R.id.wizard_previous_button);
         mPreviousButton.setOnClickListener(this);
         mPreviousButton.setText(getBackButtonLabel());
-        mViewPager = (ViewPager) wizardLayout.findViewById(R.id.step_container);
+        mViewPager = (NonSwipeableViewPager) wizardLayout.findViewById(R.id.step_container);
         return wizardLayout;
     }
 
