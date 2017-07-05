@@ -12,14 +12,14 @@ android {
 
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 22
+        targetSdkVersion 23
         //versionCode project.ext.versionCode
         //versionName version
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.android.support:support-v4:23.+'
 }
 
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
