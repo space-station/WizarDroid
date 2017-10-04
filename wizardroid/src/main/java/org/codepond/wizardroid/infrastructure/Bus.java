@@ -1,11 +1,13 @@
 package org.codepond.wizardroid.infrastructure;
 
-import java.util.HashMap;
-import java.util.Map;
+import android.util.Pair;
+
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Bus {
     private static final Bus sInstance = new Bus();
-    private static Map<Subscriber, Class<?>> sSubscribers = new HashMap<Subscriber, Class<?>>();
+    private static LinkedList<Pair<Subscriber, Class<?>>> sSubscribers = new LinkedList<>();
 
     private Bus() {
     }
@@ -16,22 +18,28 @@ public class Bus {
 
     public void post(Object event) {
         Class messageType = event.getClass();
-        for (Map.Entry<Subscriber, Class<?>> entry : sSubscribers.entrySet()) {
-            if (entry.getValue() == messageType) {
-                entry.getKey().receive(event);
+        for (Pair<Subscriber, Class<?>> entry : sSubscribers) {
+            if (entry.second == messageType) {
+                entry.first.receive(event);
             }
         }
     }
 
     public void register(Subscriber subscriber, Class<?> eventType) {
-        if (!sSubscribers.containsKey(subscriber)) {
-            sSubscribers.put(subscriber, eventType);
+        for (Pair<Subscriber, Class<?>> entry : sSubscribers) {
+            if (entry.first == subscriber && entry.second== eventType) return;
         }
+        sSubscribers.add(new Pair<Subscriber, Class<?>>(subscriber, eventType));
     }
 
     public void unregister(Subscriber subscriber) {
-        if (sSubscribers.containsKey(subscriber)) {
-            sSubscribers.remove(subscriber);
+        ListIterator<Pair<Subscriber, Class<?>>> iter= sSubscribers.listIterator();
+
+        while (iter.hasNext()) {
+            Pair<Subscriber, Class<?>> elem= iter.next();
+            if (elem.first== subscriber) {
+                iter.remove();
+            }
         }
     }
 }

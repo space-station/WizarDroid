@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import org.codepond.wizardroid.infrastructure.Bus;
 import org.codepond.wizardroid.infrastructure.Subscriber;
+import org.codepond.wizardroid.infrastructure.events.GoNextEvent;
 import org.codepond.wizardroid.infrastructure.events.StepCompletedEvent;
 import org.codepond.wizardroid.persistence.ContextManager;
 
@@ -115,6 +116,7 @@ public class Wizard implements Closeable, Subscriber {
             }
         });
         Bus.getInstance().register(this, StepCompletedEvent.class);
+        Bus.getInstance().register(this, GoNextEvent.class);
     }
 
     /**
@@ -187,8 +189,13 @@ public class Wizard implements Closeable, Subscriber {
 
     @Override
     public void receive(Object event) {
-        StepCompletedEvent stepCompletedEvent = (StepCompletedEvent) event;
-        onStepCompleted(stepCompletedEvent.isStepCompleted(), stepCompletedEvent.getStep());
+        if (event instanceof StepCompletedEvent) {
+            StepCompletedEvent stepCompletedEvent = (StepCompletedEvent) event;
+            onStepCompleted(stepCompletedEvent.isStepCompleted(), stepCompletedEvent.getStep());
+        }
+        else if (event instanceof GoNextEvent) {
+            goNext();
+        }
     }
 
     private void onStepCompleted(boolean isComplete, WizardStep step) {
