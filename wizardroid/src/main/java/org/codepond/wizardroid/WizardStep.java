@@ -43,6 +43,20 @@ public abstract class WizardStep extends Fragment {
     public void onEnter() {
     }
 
+    /**
+     * Called when a step is exited
+     */
+    public void onExitStep() {
+
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (this.isVisible() && !isVisibleToUser) {
+            onExitStep();
+        }
+    }
 
     /**
      * Notify the wizard that this step state had changed
