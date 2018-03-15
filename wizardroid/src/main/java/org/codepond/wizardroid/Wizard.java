@@ -341,6 +341,7 @@ public class Wizard implements Closeable, Subscriber {
 
         @Override
         public int getCount() {
+            if (null == mWizardFlow) return 0;
             return mWizardFlow.getSteps().size();
         }
 
