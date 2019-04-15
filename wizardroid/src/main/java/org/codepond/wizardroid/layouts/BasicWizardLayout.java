@@ -176,4 +176,9 @@ public abstract class BasicWizardLayout extends WizardFragment implements View.O
     public void setBackButtonText(String backButtonText) {
         this.mBackButtonText = backButtonText;
     }
+
+    @Override
+    public ViewPager getViewPager() {
+        return mViewPager;
+    }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -116,4 +117,6 @@ public abstract class WizardFragment extends Fragment implements Wizard.WizardCa
         super.onDetach();
         wizard.close();
     }
+
+    public abstract ViewPager getViewPager();
 }
