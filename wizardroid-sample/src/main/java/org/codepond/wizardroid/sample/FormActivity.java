@@ -1,7 +1,7 @@
 package org.codepond.wizardroid.sample;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import androidx.core.app.FragmentActivity;
 
 
 public class FormActivity extends FragmentActivity {

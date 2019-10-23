@@ -1,7 +1,7 @@
 package org.codepond.wizardroid.layouts;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.text.TextUtils;
 import android.view.*;
 import android.widget.Button;

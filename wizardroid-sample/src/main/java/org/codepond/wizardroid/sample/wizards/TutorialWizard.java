@@ -8,7 +8,7 @@ import org.codepond.wizardroid.sample.steps.TutorialStep2;
 public class TutorialWizard extends BasicWizardLayout {
 
     /**
-     * Note that we inherit from {@link android.support.v4.app.Fragment} and therefore must have an empty constructor
+     * Note that we inherit from {@link androidx.core.app.Fragment} and therefore must have an empty constructor
      */
     public TutorialWizard() {
         super();
